@@ -1,0 +1,73 @@
+.card {
+    /*min-width: 50%;*/
+    width: 96%;
+    display: inline-block;
+    cursor: pointer;
+    margin: 1%;
+
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    -ms-perspective: 1000px;
+    -o-perspective: 1000px;
+    perspective: 1000px;
+}
+
+.card .body {
+    padding-bottom: 200%;
+    transform-style: preserve-3d;
+    position: relative;
+
+    -webkit-transition: transform 1s;
+    -moz-transition: transform 1s;
+    -ms-transition: transform 1s;
+    -o-transition: transform 1s;
+    transition: transform 1s;
+}
+
+.card.flip .body {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.card .front,
+.card .back {
+    height: 100%;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 5px;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-box-shadow: 2px 2px 2px black;
+    -moz-box-shadow: 2px 2px 2px black;
+    box-shadow: 2px 2px 2px black;
+}
+
+.card .back {
+    background-color: #7aba7b;
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+.card .front {
+    background-color: #bfcfff;
+    transform: rotateY(180deg);
+}
+
+.card .thumb {
+    width: 100%;
+    padding-bottom: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.card .fa-refresh {
+    color: white;
+}
