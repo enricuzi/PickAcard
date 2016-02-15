@@ -48,7 +48,7 @@
 }
 
 .card .back {
-    background-color: #7aba7b;
+    background-color: red;
     z-index: 2;
     /* for firefox 31 */
     transform: rotateY(0deg);
