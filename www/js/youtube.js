@@ -7,6 +7,7 @@ app.Youtube = {
             .append($("<div></div>").addClass("title")
                 .append($("<label></label>").addClass("title").text(data.title))
                 .append($("<div></div>").addClass("channel-title").text(data.channelTitle)))
+            .append($("<div></div>").attr("id", "player"))
             .append(data.image
                 .append($("<div></div>").addClass("panel-absolute")
                     .append($("<div></div>").addClass("table")
@@ -15,15 +16,15 @@ app.Youtube = {
                                 .append($("<i></i>").addClass("fa fa-youtube-play fa-5x").click(function (e) {
                                     e.stopPropagation();
                                     $(this).fadeOut();
-                                    app.dom.find(".thumb").fadeOut();
-                                    self.Player.init();
+                                    app.dom.find(".thumb").fadeOut(function () {
+                                        self.Player.init();
+                                    });
                                 }))
                             )
                         )
                     )
                 )
-            )
-            .append($("<div></div>").attr("id", "player"));
+            );
     },
     Video: {},
     Search: {
@@ -53,7 +54,7 @@ app.Youtube = {
             if (window.outerWidth > 768) {
                 image = item.snippet.thumbnails.high;
             }
-            return this.Video = {
+            return app.Youtube.Video = {
                 id: item.id.videoId,
                 channelTitle: item.snippet.channelTitle,
                 description: item.snippet.description,
@@ -88,7 +89,10 @@ app.Youtube = {
                 this.status = 0;
             }
         },
-        stopVideo: function () {
+        play: function () {
+            this.player.playVideo();
+        },
+        stop: function () {
             this.player.stopVideo();
         }
     },
@@ -102,6 +106,7 @@ app.Youtube = {
             firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
 
             window.onYouTubeIframeAPIReady = function () {
+                app.Youtube.Player.init();
             }
         }
     }
