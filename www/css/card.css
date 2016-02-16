@@ -45,17 +45,19 @@
     -webkit-box-shadow: 2px 2px 2px black;
     -moz-box-shadow: 2px 2px 2px black;
     box-shadow: 2px 2px 2px black;
+    padding: 4%;
+    box-sizing: border-box;
 }
 
 .card .back {
-    background-color: red;
+    background-color: #7aba7b;
     z-index: 2;
     /* for firefox 31 */
     transform: rotateY(0deg);
 }
 
 .card .front {
-    background-color: #bfcfff;
+    background-color: #f1f1f1;
     transform: rotateY(180deg);
 }
 
@@ -65,9 +67,21 @@
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center;
-    
+    position: relative;
 }
 
 .card .fa-refresh {
     color: white;
+}
+
+.card .title label {
+    color: #167ac6;
+    display: block;
+    font-size: 1.5rem;
+}
+
+.card .title div {
+    color: #767676;
+    font-size: 1.2rem;
+    margin: 1rem 0;
 }

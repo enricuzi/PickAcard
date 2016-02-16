@@ -17,13 +17,26 @@
  * under the License.
  */
 var app = {
-    app: null,
-    youtubeSearchUrl: "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDGWAfmwVUv_n0YJd1EQQKHB8d3aHooWHI",
+    dom: null,
     isMobile: function () {
         return window.outerWidth < 1200;
     },
+    loader: {
+        element: null,
+        show: function () {
+            if (!this.element) {
+                this.element = app.dom.find(".loader");
+            }
+            this.element.show();
+        },
+        hide: function () {
+            this.element.hide();
+        }
+    },
     // Application Constructor
     initialize: function () {
+        this.dom = $(".app");
+        this.loader.show();
         if (this.isMobile()) {
             this.bindEvents();
         } else {
@@ -48,24 +61,22 @@ var app = {
     receivedEvent: function (id) {
         if (id == "deviceready") {
             var self = this;
-            self.app = $(".app");
-            self.app.find(".loader").hide();
+            self.loader.hide();
 
-            self.app.find(".deck").append($("<div></div>").card({
+            self.dom.find(".deck").append($("<div></div>").card({
                 click: function () {
                     var card = $(this);
                     card.toggleClass("flip");
                     if (card.hasClass("flip")) {
-                        var url = self.youtubeSearchUrl + "&q=" + app.Youtube.getKeySearch();
-                        $.get(url).done(function (data) {
-                            card.find(".front").append(app.Youtube.content(data))
-                        });
+                        app.Youtube.Search.search();
                     }
                     else {
                         card.find(".front").html("");
                     }
                 }
             }));
+
+            app.Youtube.Script.init();
         }
     }
 };
